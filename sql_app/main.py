@@ -19,11 +19,12 @@ def get_db():
     finally:
         db.close()
 
+
 # 미세먼지 데이터 관련 함수 추가
 # 주고 받을 정보에 따라 추가 예정
 
 @app.post("/dust/")
-def create_dust(dust: schemas.DustCreate, db: Session = Depends(get_db)):
+def create_dust(dust: schemas.dustCreate, db: Session = Depends(get_db)):
     return crud.create_dust(db=db, dust=dust)
 
 
