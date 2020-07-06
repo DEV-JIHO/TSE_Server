@@ -34,3 +34,20 @@ def create_user_item(db: Session, item: schemas.ItemCreate, user_id: int):
     db.commit()
     db.refresh(db_item)
     return db_item
+
+
+# 미세먼지 관련 함수
+
+def get_dusts(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Dust).offset(skip).limit(limit).all()
+
+
+def create_dust(db: Session, dust: schemas.Dust):
+    db_dust = models.Dust(Uv=dust.Uv,
+                          Nitric=dust.Nitric,
+                          Sulfuric=dust.Sulfuric,
+                          Formal=dust.Formal)
+    db.add(db_dust)
+    db.commit()
+    db.refresh(db_dust)
+    return db_dust

@@ -20,6 +20,8 @@ class Item(ItemBase):
         orm_mode = True
 
 
+# 유저 관련 함수
+
 class UserBase(BaseModel):
     email: str
 
@@ -35,3 +37,25 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+
+
+# 미세먼지 관련 함수
+
+class DustBase(BaseModel):
+    Uv: str
+    Nitric: str
+    Sulfuric: str
+    Formal: str
+
+    class Config:
+        orm_mode = True
+
+
+
+class DustCreate(DustBase):
+    pass
+
+
+class Dust(DustBase):
+    id: int
+

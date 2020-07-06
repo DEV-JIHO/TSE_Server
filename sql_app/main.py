@@ -20,7 +20,7 @@ def get_db():
         db.close()
 
 
-@app.post("/users/", response_model=schemas.User)
+@app.post("/users/")
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db_user = crud.get_user_by_email(db, email=user.email)
     if db_user:
@@ -44,7 +44,7 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
 
 @app.post("/users/{user_id}/items/", response_model=schemas.Item)
 def create_item_for_user(
-    user_id: int, item: schemas.ItemCreate, db: Session = Depends(get_db)
+        user_id: int, item: schemas.ItemCreate, db: Session = Depends(get_db)
 ):
     return crud.create_user_item(db=db, item=item, user_id=user_id)
 
@@ -53,3 +53,16 @@ def create_item_for_user(
 def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     items = crud.get_items(db, skip=skip, limit=limit)
     return items
+
+
+# 미세먼지 데이터 관련 함수 추가
+
+@app.post("/dust/")
+def create_dust(dust: schemas.DustCreate, db: Session = Depends(get_db)):
+    return crud.create_dust(db=db, dust=dust)
+
+
+@app.get("/dust/", response_model=List[schemas.Dust])
+def read_dusts(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    dusts = crud.get_dusts(db, skip=skip, limit=limit)
+    return dusts

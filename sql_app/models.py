@@ -24,3 +24,13 @@ class Item(Base):
     owner_id = Column(Integer, ForeignKey("users.id"))
 
     owner = relationship("User", back_populates="items")
+
+
+class Dust(Base):
+    __tablename__ = "dust"
+
+    id = Column(Integer, primary_key=True, index=True)
+    Uv = Column(String)
+    Nitric = Column(String)
+    Sulfuric = Column(String)
+    Formal = Column(String)
