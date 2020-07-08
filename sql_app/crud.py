@@ -13,7 +13,7 @@ def get_dusts(db: Session, skip: int = 0, limit: int = 100):
 
 def create_dust(db: Session, dust: schemas.dustCreate):
     currentTime = arrow.utcnow().to('Asia/Seoul').format(arrow.FORMAT_RFC1123)
-    db_dust = models.Dust(Date=str(currentTime),
+    db_dust = models.Dust(CurrentTime=str(currentTime),
                           location=dust.location,
                           DustPm10=dust.DustPm10,
                           DustPm25=dust.DustPm25,
