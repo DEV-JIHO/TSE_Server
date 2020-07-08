@@ -28,6 +28,8 @@ def create_dust(dust: schemas.dustCreate, db: Session = Depends(get_db)):
     return crud.create_dust(db=db, dust=dust)
 
 
+# 위치 정보에 따라서 값을 반환
+# 위치를 좌표로 받기 때문에 이 부분을 어떻게 할 것인가 상의
 @app.get("/dust/", response_model=List[schemas.Dust])
 def read_dusts(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     dusts = crud.get_dusts(db, skip=skip, limit=limit)

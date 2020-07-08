@@ -15,10 +15,19 @@ def create_dust(db: Session, dust: schemas.dustCreate):
     currentTime = arrow.utcnow().to('Asia/Seoul').format(arrow.FORMAT_RFC1123)
     db_dust = models.Dust(Date=str(currentTime),
                           location=dust.location,
-                          Uv=dust.Uv,
-                          Nitric=dust.Nitric,
-                          Sulfuric=dust.Sulfuric,
-                          Formal=dust.Formal)
+                          DustPm10=dust.DustPm10,
+                          DustPm25=dust.DustPm25,
+                          Humidity=dust.Humidity,
+                          Temperature=dust.Temperature,
+                          CarbonMonoxide=dust.CarbonMonoxide,
+                          NitrogenDioxide=dust.NitrogenDioxide,
+                          Ethanol=dust.Ethanol,
+                          Hydrogen=dust.Hydrogen,
+                          Ammonia=dust.Ammonia,
+                          Methane=dust.Methane,
+                          Propane=dust.Propane,
+                          IsoButane=dust.IsoButane,
+                          )
     db.add(db_dust)
     db.commit()
     db.refresh(db_dust)
