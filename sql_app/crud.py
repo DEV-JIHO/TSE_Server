@@ -11,6 +11,10 @@ def get_dusts(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Dust).offset(skip).limit(limit).all()
 
 
+def get_dustId(db: Session, dust_id: int = 0):
+    return db.query(models.Dust).get(dust_id)
+
+
 def create_dust(db: Session, dust: schemas.dustCreate):
     currentTime = arrow.utcnow().to('Asia/Seoul').format(arrow.FORMAT_RFC1123)
     db_dust = models.Dust(CurrentTime=str(currentTime),
