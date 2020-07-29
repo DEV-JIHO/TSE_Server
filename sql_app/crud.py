@@ -1,36 +1,38 @@
 from sqlalchemy.orm import Session
+import arrow
 
 from . import models, schemas
 
 
-def get_user(db: Session, user_id: int):
-    return db.query(models.User).filter(models.User.id == user_id).first()
+# 미세먼지 관련 함수
+# 받을 정보에 따라서 추가 예정
+
+def get_dusts(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Dust).offset(skip).limit(limit).all()
 
 
-def get_user_by_email(db: Session, email: str):
-    return db.query(models.User).filter(models.User.email == email).first()
+def get_dustId(db: Session, dust_id: int = 0):
+    return db.query(models.Dust).get(dust_id)
 
 
-def get_users(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.User).offset(skip).limit(limit).all()
-
-
-def create_user(db: Session, user: schemas.UserCreate):
-    fake_hashed_password = user.password + "notreallyhashed"
-    db_user = models.User(email=user.email, hashed_password=fake_hashed_password)
-    db.add(db_user)
+def create_dust(db: Session, dust: schemas.dustCreate):
+    currentTime = arrow.utcnow().to('Asia/Seoul').format(arrow.FORMAT_RFC1123)
+    db_dust = models.Dust(CurrentTime=str(currentTime),
+                          location=dust.location,
+                          DustPm10=dust.DustPm10,
+                          DustPm25=dust.DustPm25,
+                          Humidity=dust.Humidity,
+                          Temperature=dust.Temperature,
+                          CarbonMonoxide=dust.CarbonMonoxide,
+                          NitrogenDioxide=dust.NitrogenDioxide,
+                          Ethanol=dust.Ethanol,
+                          Hydrogen=dust.Hydrogen,
+                          Ammonia=dust.Ammonia,
+                          Methane=dust.Methane,
+                          Propane=dust.Propane,
+                          IsoButane=dust.IsoButane,
+                          )
+    db.add(db_dust)
     db.commit()
-    db.refresh(db_user)
-    return db_user
-
-
-def get_items(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Item).offset(skip).limit(limit).all()
-
-
-def create_user_item(db: Session, item: schemas.ItemCreate, user_id: int):
-    db_item = models.Item(**item.dict(), owner_id=user_id)
-    db.add(db_item)
-    db.commit()
-    db.refresh(db_item)
-    return db_item
+    db.refresh(db_dust)
+    return db_dust
