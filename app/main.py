@@ -1,5 +1,4 @@
 from typing import List
-import time
 
 from fastapi import Depends, FastAPI, HTTPException, Request
 from sqlalchemy.orm import Session
