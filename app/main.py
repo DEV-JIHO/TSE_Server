@@ -25,7 +25,7 @@ def get_db():
 # 주고 받을 정보에 따라 추가 예정
 
 
-@app.post("/dust/")
+@app.post("/creat_dustdata/")
 def create_dust(dust: schemas.dustCreate, db: Session = Depends(get_db)):
     return crud.create_dust(db=db, dust=dust)
 
@@ -38,7 +38,7 @@ async def read_dusts(skip: int = 0, limit: int = 100, db: Session = Depends(get_
     return dusts
 
 
-@app.get("/dust/{dust_id}", response_model=schemas.Dust)
+@app.get("/get_dustdata/{dust_id}", response_model=schemas.Dust)
 async def read_dusts(dust_id: int = 0, db: Session = Depends(get_db)):
     dusts = crud.get_dustId(db, dust_id=dust_id)
     return dusts
