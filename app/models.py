@@ -7,7 +7,7 @@ from .database import Base
 # 하드웨어 수집 정보에 따라 속성 추가 예정
 
 class Dust(Base):
-    __tablename__ = "dust"
+    __tablename__ = "devicedata"
 
     # SQLAlchemy가 첫 integer 타입의 PK에 auto increment 속성을 알아서 부여함
     # 필요 여부는 아직 모름 일단 추가
@@ -28,3 +28,20 @@ class Dust(Base):
     Methane = Column(Float)
     Propane = Column(Float)
     IsoButane = Column(Float)
+
+
+class Weather_InfoTable(Base):
+    __tablename__ = 'weatherapidata'
+    index = Column(Integer, primary_key=True,autoincrement=True)
+    getHeatFeelingIdx = Column(Integer)
+    getDiscomfortIdx = Column(Integer)
+    getUVIdx = Column(String)
+    getSenTaIdx = Column(Integer)
+    getAirDiffusionIdx = Column(Integer)
+    SO2 = Column(Float)
+    CO = Column(Float)
+    O3 = Column(Float)
+    NO2 = Column(Float)
+    PM10 = Column(Integer)
+    PM25 = Column(Integer)
+    collected_time = Column(String)
