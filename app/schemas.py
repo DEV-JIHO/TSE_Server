@@ -1,6 +1,3 @@
-
-from typing import List, Optional
-
 from pydantic import BaseModel
 
 
@@ -8,7 +5,7 @@ from pydantic import BaseModel
 
 # 하드웨어 수집 정보에 따라서 변수 추가 예정
 
-class dustBase(BaseModel):
+class DustBase(BaseModel):
     DustPm10: float
     DustPm25: float
     Humidity: float
@@ -26,10 +23,28 @@ class dustBase(BaseModel):
         orm_mode = True
 
 
-class dustCreate(dustBase):
+class DustCreate(DustBase):
     location: str
 
 
-class Dust(dustBase):
+class Dust(DustBase):
     id: int
     CurrentTime: str
+
+
+class ApiData(BaseModel):
+    getHeatFeelingIdx: int
+    getDiscomfortIdx: int
+    getUVIdx: int
+    getSenTaIdx: int
+    getAirDiffusionIdx: int
+    SO2: float
+    CO: float
+    O3: float
+    NO2: float
+    PM10: int
+    PM25: int
+    collected_time: str
+
+    class Config:
+        orm_mode = True

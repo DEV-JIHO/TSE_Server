@@ -4,10 +4,10 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 
 # database URL 필요
 # 接続したいDBの基本情報を設定
-user_name = "root"
-password = "root"
+user_name = "madang"
+password = "madang"
 host = "localhost"  # docker-composeで定義したMySQLのサービス名
-database_name = "tse"
+database_name = "dustdata"
 
 #SQLALCHEMY_DATABASE_URL = "mysql://user:password@localhost/tse?charset=utf8"
 # SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
@@ -29,8 +29,8 @@ engine = create_engine(
 session = scoped_session(
     # ORM実行時の設定。自動コミットするか、自動反映するか
     sessionmaker(
-        autocommit=False,
-        autoflush=False,
+        autocommit=True,
+        autoflush=True,
         bind=engine
     )
 )
