@@ -1,29 +1,21 @@
-# -*- coding: utf-8 -*-
-# DBへの接続設定
+import mysql.connector, os
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy.engine.url import URL
 
 
-# 接続したいDBの基本情報を設定
-user_name = "madang"
-password = "madang"
-host = "localhost"  # docker-composeで定義したMySQLのサービス名
-database_name = "weatherapi"
+DB = {
+    'drivername': 'mysql',
+    'host': 'sangmin9.synology.me',
+    'port': '3307',
+    'username': os.environ['DBUNAME'],
+    'password': os.environ['DBPASS'],
+    'database': os.environ['DBNAME'],
+    'query': {'charset':'utf8'}
+}
 
-DATABASE = 'mysql://%s:%s@%s/%s?charset=utf8' % (
-    user_name,
-    password,
-    host,
-    database_name,
-)
-
-# DBとの接続
-ENGINE = create_engine(
-    DATABASE,
-    encoding="utf-8",
-    echo=True
-)
+ENGINE = create_engine(URL(**DB))
 
 # Sessionの作成
 session = scoped_session(

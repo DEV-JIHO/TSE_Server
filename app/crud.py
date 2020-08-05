@@ -1,8 +1,9 @@
+import arrow
+import time
 from sqlalchemy.orm import Session
-import arrow, time
 
-from . import models, schemas
 from weatherApp import WeatherApi
+from . import models, schemas
 
 
 # 미세먼지 관련 함수
@@ -33,7 +34,10 @@ def create_dust(db: Session, dust: schemas.DustCreate):
                           Propane=dust.Propane,
                           IsoButane=dust.IsoButane,
                           )
+
     db.add(db_dust)
+    db.commit()
+    db.refresh(db_dust)
     return db_dust
 
 
@@ -45,22 +49,25 @@ def create_apidata(db: Session):
     result, lasttime = WeatherApi.get_all_api_data(date, lasttime)
     lasttime = date
     result['collected_time'] = lasttime
-    print(result['collected_time'])
-    weather = models.Weather_InfoTable()
-    weather.getHeatFeelingIdx = result['getHeatFeelingIdx']
-    weather.getDiscomfortIdx = result['getDiscomfortIdx']
-    weather.getUVIdx = result['getUVIdx']
-    weather.getSenTaIdx = result['getSenTaIdx']
-    weather.getAirDiffusionIdx = result['getHeatFeelingIdx']
-    weather.SO2 = result['SO2']
-    weather.CO = result['CO']
-    weather.O3 = result['O3']
-    weather.NO2 = result['NO2']
-    weather.PM10 = result['PM10']
-    weather.PM25 = result['PM25']
-    weather.collected_time = lasttime
+    weather = models.Weather_InfoTable(
+        getHeatFeelingIdx=result['getHeatFeelingIdx'],
+        getDiscomfortIdx=result['getDiscomfortIdx'],
+        getUVIdx=result['getUVIdx'],
+        getSenTaIdx=result['getSenTaIdx'],
+        getAirDiffusionIdx=result['getHeatFeelingIdx'],
+        SO2=result['SO2'],
+        CO=result['CO'],
+        O3=result['O3'],
+        NO2=result['NO2'],
+        PM10=result['PM10'],
+        PM25=result['PM25'],
+        collected_time=lasttime
+    )
     db.add(weather)
+    db.commit()
+    db.refresh(weather)
 
     info = db.query(models.Weather_InfoTable).all()
     return info
+
 
