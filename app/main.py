@@ -19,6 +19,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # Dependency
 def get_db():
     db = session()
@@ -26,6 +27,7 @@ def get_db():
         yield db
     finally:
         db.close()
+
 
 @app.post("/creat_dustdata/")
 async def create_dust(dust: schemas.DustCreate, db: Session = Depends(get_db)):
@@ -44,6 +46,7 @@ async def read_dusts(db: Session = Depends(get_db)):
 async def read_dusts(dust_id: int = 0, db: Session = Depends(get_db)):
     dusts = crud.get_dustId(db, dust_id=dust_id)
     return dusts
+
 
 @app.get("/creat_apidata/")
 async def create_apidata(db: Session = Depends(get_db)):

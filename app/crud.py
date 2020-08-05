@@ -34,7 +34,6 @@ def create_dust(db: Session, dust: schemas.DustCreate):
                           IsoButane=dust.IsoButane,
                           )
     db.add(db_dust)
-    db.refresh(db_dust)
     return db_dust
 
 
