@@ -1,9 +1,7 @@
-import urllib
 from urllib.parse import urlencode, quote_plus, unquote
-from urllib.request import urlopen
 import requests
 import json
-import time
+
 
 def api_Living_Reading(key, feature, time, areano='1100000000'):\
   # I used api from Korea Meteorological Administration

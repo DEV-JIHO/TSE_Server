@@ -26,16 +26,10 @@ class DustBase(BaseModel):
 class DustCreate(DustBase):
     location: str
 
-
-class Dust(DustBase):
-    id: int
-    CurrentTime: str
-
-
 class ApiData(BaseModel):
     getHeatFeelingIdx: int
     getDiscomfortIdx: int
-    getUVIdx: int
+    getUVIdx: str
     getSenTaIdx: int
     getAirDiffusionIdx: int
     SO2: float

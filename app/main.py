@@ -1,13 +1,11 @@
-from typing import List
-
-from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi import Depends, FastAPI
 from sqlalchemy.orm import Session
 from starlette.middleware.cors import CORSMiddleware
 
-from . import crud, models, schemas
-from .database import session, engine
+from . import crud, schemas
+from .database import session
 
-#models.Base.metadata.create_all(bind=engine)
+# models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -19,6 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # Dependency
 def get_db():
     db = session()
@@ -27,8 +26,9 @@ def get_db():
     finally:
         db.close()
 
+
 @app.post("/creat_dustdata/")
-async def create_dust(dust: schemas.DustCreate, db: Session = Depends(get_db)):
+def create_dust(dust: schemas.DustCreate, db: Session = Depends(get_db)):
     return crud.create_dust(db=db, dust=dust)
 
 
@@ -39,11 +39,6 @@ async def read_dusts(db: Session = Depends(get_db)):
     dusts = crud.get_dusts(db)
     return dusts
 
-
-@app.get("/get_dustdata/{dust_id}", response_model=schemas.Dust)
-async def read_dusts(dust_id: int = 0, db: Session = Depends(get_db)):
-    dusts = crud.get_dustId(db, dust_id=dust_id)
-    return dusts
 
 @app.get("/creat_apidata/")
 async def create_apidata(db: Session = Depends(get_db)):
