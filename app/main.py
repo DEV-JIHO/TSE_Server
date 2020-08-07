@@ -19,7 +19,7 @@ app.add_middleware(
 
 
 # Dependency
-def get_db():
+async def get_db():
     db = session()
     try:
         yield db
