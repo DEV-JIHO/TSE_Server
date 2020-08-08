@@ -3,8 +3,7 @@ import time
 from sqlalchemy.orm import Session
 
 from weatherApp import WeatherApi
-from . import models, schemas
-
+from src.app.api import schemas, models
 
 
 # 미세먼지 관련 함수
@@ -46,7 +45,7 @@ def create_apidata(db: Session):
     now = time.localtime()
     date = f"{now.tm_year}{now.tm_mon:02d}{now.tm_mday:02d}{now.tm_hour:02d}"
     lasttime = ''
-    print("Time passed.\nGet the api data")
+    print("Time passed.\nGet the app data")
     result, lasttime = WeatherApi.get_all_api_data(date, lasttime)
     lasttime = date
     result['collected_time'] = lasttime

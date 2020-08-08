@@ -4,7 +4,7 @@ import json
 
 
 def api_Living_Reading(key, feature, time, areano='1100000000'): \
-        # I used api from Korea Meteorological Administration
+        # I used app from Korea Meteorological Administration
     # https://data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15043583
 
     # -*- coding:utf-8 -*-
@@ -31,7 +31,7 @@ def get_living_weather_data(key, query, time, lasttime, result, areano='11000000
 
 
 def api_air_pullution(key, item_code):
-    # Used api made by Korea Environment Corporation
+    # Used app made by Korea Environment Corporation
     # https://data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15000581
     url = f"http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnMesureLIst"
     # -*- coding:utf-8 -*-

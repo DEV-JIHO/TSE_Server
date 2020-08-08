@@ -1,7 +1,6 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, Float
 
-from .database import Base
+from src.app.database import Base
 
 
 # 하드웨어 수집 정보에 따라 속성 추가 예정

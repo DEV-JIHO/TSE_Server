@@ -6,4 +6,4 @@ COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir fastapi
 RUN pip install -r requirements.txt
 
-COPY test_app /app
+COPY app /app
