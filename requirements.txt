@@ -15,7 +15,6 @@ Jinja2==2.11.2
 legacy==0.1.6
 MarkupSafe==1.1.1
 mysql-connector-python==8.0.21
-mysqlclient @ file:///C:/Users/Hello/Desktop/TSE_Server/mysqlclient-1.4.6-cp38-cp38-win32.whl
 protobuf==3.12.4
 pydantic==1.6.1
 python-dateutil==2.8.1

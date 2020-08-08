@@ -6,6 +6,7 @@ from weatherApp import WeatherApi
 from . import models, schemas
 
 
+
 # 미세먼지 관련 함수
 # 받을 정보에 따라서 추가 예정
 
