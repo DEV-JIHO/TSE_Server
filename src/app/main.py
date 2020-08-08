@@ -1,10 +1,14 @@
 from fastapi import FastAPI, Depends
-from sqlalchemy.orm import Session
 from starlette.middleware.cors import CORSMiddleware
+
+from app.database import dustdata
+
 
 # models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+app.include_router(dustdata.router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -13,29 +17,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-# Dependency
-async def get_db():
-    db = session()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
-
-
-@app.get("/")
-async def read_root():
-    message = f"Hello world! From FastAPI running on Uvicorn with Gunicorn. Using Python {version}"
-    return {"message": message}
-
-
-
-@app.post("/creat_dustdata/")
-def create_dust(dust: app.schemas.DustCreate, db: Session = Depends(get_db)):
-    return app.crud.create_dust(db=db, dust=dust)
 
 """
 # 위치 정보에 따라서 값을 반환

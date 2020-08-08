@@ -2,8 +2,15 @@ FROM tiangolo/uvicorn-gunicorn:python3.8
 
 LABEL maintainer="Jeong <wjdwlgh_34@naver.com>"
 
-COPY requirements.txt requirements.txt
-RUN pip install --no-cache-dir fastapi
-RUN pip install -r requirements.txt
+WORKDIR /usr/src/app
 
-COPY app /app
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+COPY ./requirements.txt /usr/src/app/requirements.txt
+
+RUN pip install --no-cache-dir fastapi
+RUN pip install -r /usr/src/app/requirements.txt
+RUN rm -rf /root/.cache/pip
+
+COPY . /usr/src/app/

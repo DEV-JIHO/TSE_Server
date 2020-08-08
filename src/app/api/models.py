@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float
 
-from src.app.database import Base
+from app.database import Base
 
 
 # 하드웨어 수집 정보에 따라 속성 추가 예정
