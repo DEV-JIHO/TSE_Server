@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, APIRouter
+from fastapi import FastAPI, Depends, APIRouter, HTTPException
 from sqlalchemy.orm import Session
 from app.database import session
 from app.api.schemas import DustCreate
