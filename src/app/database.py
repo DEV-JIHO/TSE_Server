@@ -9,9 +9,9 @@ DB = {
     'drivername': 'mysql',
     'host': 'sangmin9.synology.me',
     'port': '3307',
-    'username': "jiho",
-    'password': "8#k2U%B5dmBr",
-    'database': "altpajswl",
+    'username': "",
+    'password': "",
+    'database': "",
     'query': {'charset': 'utf8'}
 }
 
