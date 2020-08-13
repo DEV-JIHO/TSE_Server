@@ -7,11 +7,11 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 # DB 연결 정보
 DB = {
     'drivername': 'mysql',
-    'host': 'sangmin9.synology.me',
-    'port': '3307',
-    'username': "jiho",
-    'password': "8#k2U%B5dmBr",
-    'database': "altpajswl",
+    'host': '',
+    'port': '',
+    'username': "",
+    'password': "",
+    'database': "",
     'query': {'charset': 'utf8'}
 }
 
