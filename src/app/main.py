@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
 from starlette.middleware.cors import CORSMiddleware
 
-from app.api import dustdata
+from app.api import dustdata,apidata
 
 
 # models.Base.metadata.create_all(bind=engine)
@@ -9,6 +9,7 @@ from app.api import dustdata
 app = FastAPI()
 
 app.include_router(dustdata.router)
+app.include_router(apidata.router)
 
 app.add_middleware(
     CORSMiddleware,

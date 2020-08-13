@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 from app.api.schemas import DustCreate
 from app.api.models import Dust, Weather_InfoTable
-from app.weatherApp import get_all_api_data
+from app.weatherApp.WeatherApi import get_all_api_data
 
 
 # 미세먼지 관련 함수
