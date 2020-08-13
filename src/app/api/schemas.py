@@ -26,6 +26,7 @@ class DustBase(BaseModel):
 class DustCreate(DustBase):
     location: str
 
+
 class ApiData(BaseModel):
     getHeatFeelingIdx: int
     getDiscomfortIdx: int
