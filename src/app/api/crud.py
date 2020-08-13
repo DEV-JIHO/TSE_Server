@@ -1,8 +1,10 @@
 import arrow
+import time
 from sqlalchemy.orm import Session
 
 from app.api.schemas import DustCreate
-from app.api.models import Dust
+from app.api.models import Dust, Weather_InfoTable
+from app.weatherApp import get_all_api_data
 
 
 # 미세먼지 관련 함수
@@ -39,16 +41,16 @@ def create_dust(db: Session, dust: DustCreate):
     db.refresh(db_dust)
     return db_dust
 
-"""
+
 def create_apidata(db: Session):
     now = time.localtime()
     date = f"{now.tm_year}{now.tm_mon:02d}{now.tm_mday:02d}{now.tm_hour:02d}"
     lasttime = ''
     print("Time passed.\nGet the app data")
-    result, lasttime = WeatherApi.get_all_api_data(date, lasttime)
+    result, lasttime = get_all_api_data(date, lasttime)
     lasttime = date
     result['collected_time'] = lasttime
-    weather = models.Weather_InfoTable(
+    weather = Weather_InfoTable(
         getHeatFeelingIdx=result['getHeatFeelingIdx'],
         getDiscomfortIdx=result['getDiscomfortIdx'],
         getUVIdx=result['getUVIdx'],
@@ -66,8 +68,8 @@ def create_apidata(db: Session):
     db.commit()
     db.refresh(weather)
 
-    info = db.query(models.Weather_InfoTable).all()
+    info = db.query(Weather_InfoTable).all()
     return info
-    """
+
 
 
