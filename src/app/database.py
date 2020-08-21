@@ -7,8 +7,8 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 # DB 연결 정보
 DB = {
     'drivername': 'mysql',
-    'host': 'sangmin9.synology.me',
-    'port': '3307',
+    'host': '',
+    'port': '',
     'username': "",
     'password': "",
     'database': "",
